@@ -74,7 +74,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Users\kpedersen\documents\visual studio 2015\Projects\CoolRunnerClient\CoolRunnerClient\CoolRunnerClient.csproj">
+    <ProjectReference Include="..\CoolRunnerClient\CoolRunnerClient.csproj">
       <Project>{915fc5de-7d43-4891-9358-ca650c72c7c8}</Project>
       <Name>CoolRunnerClient</Name>
     </ProjectReference>

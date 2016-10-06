@@ -25,3 +25,30 @@ C:\Users\kpedersen\documents\visual studio 2015\Projects\CoolRunnerClient\CoolRu
 C:\Users\kpedersen\documents\visual studio 2015\Projects\CoolRunnerClient\CoolRunnerClient\bin\Debug\zh-CN\FluentValidation.resources.dll
 C:\Users\kpedersen\documents\visual studio 2015\Projects\CoolRunnerClient\CoolRunnerClient\obj\Debug\CRClient.dll
 C:\Users\kpedersen\documents\visual studio 2015\Projects\CoolRunnerClient\CoolRunnerClient\obj\Debug\CRClient.pdb
+C:\Kode\CoolRunnerClient\CoolRunnerClient\obj\Debug\CoolRunnerClient.csprojResolveAssemblyReference.cache
+C:\Kode\CoolRunnerClient\CoolRunnerClient\obj\Debug\CRClient.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\obj\Debug\CRClient.pdb
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\CRClient.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\CRClient.pdb
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\FluentValidation.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\Newtonsoft.Json.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\FluentValidation.pdb
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\FluentValidation.xml
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\Newtonsoft.Json.xml
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\cs\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\da\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\de\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\es\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\fa\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\fi\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\fr\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\it\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\ko\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\mk\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\nl\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\pl\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\pt\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\ru\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\sv\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\tr\FluentValidation.resources.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClient\bin\Debug\zh-CN\FluentValidation.resources.dll
