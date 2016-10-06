@@ -1,4 +1,4 @@
-﻿namespace CoolRunnerClient.Models
+﻿namespace CRClient.Enums
 {
     public enum LabelFormat
     {

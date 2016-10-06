@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using CoolRunnerClient.Models;
+using CRClient.Enums;
+using CRClient.Models;
+using CRClient.Responses;
 
-namespace CoolRunnerClient
+namespace CRClient
 {
     public interface ICoolRunnerClient
     {
-        Task CreateShipmentAsync();
-        void CreateShipment();
-        Task CreateShipmentsAsync();
-        void CreateShipments();
-        Task<PriceModel> GetPriceAsync(string url);
-        PriceModel GetPrice(string url);
-        Task<IEnumerable<PriceModel>> GetPricesAsync(string url);
-        IEnumerable<PriceModel> GetPrices(string url);
-
+        Task<ShipmentResponse> CreateShipmentAsync(ShipmentModel model);
+        ShipmentResponse CreateShipment(ShipmentModel model);
+        Task<PriceResponse> GetPriceAsync(ShipmentModel model);
+        PriceResponse GetPrice(ShipmentModel model);
+        Task<ShipmentInfoResponse> GetShipmentInfoAsync(long shipmentId);
+        ShipmentInfoResponse GetShipmentInfo(long shipmentId);
+        Task<DroppointResponse> GetDroppointsAsync(Carrier carrier, DroppointModel model);
+        DroppointResponse GetDroppoints(Carrier carrier, DroppointModel model);
+        Task<bool> DeletePackageLabelAsync(long packageNumber);
+        bool DeletePackageLabel(long packageNumber);
         HttpStatusCode? StatusCode { get; }
     }
 }
