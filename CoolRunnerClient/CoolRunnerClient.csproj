@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CoolRunnerClient.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Responses\FreightRatesResponse.cs" />
     <Compile Include="Responses\DroppointResponse.cs" />
     <Compile Include="Models\DroppointModel.cs" />
     <Compile Include="Enums\Carrier.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="Responses\ShipmentResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\ShipmentInfoResponse.cs" />
-    <Compile Include="UnderscoreMappingResolver.cs" />
+    <Compile Include="Responses\TrackingResponse.cs" />
     <Compile Include="Validation\ShipmentModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using CRClient.Enums;
 using CRClient.Exceptions;
@@ -19,18 +21,27 @@ namespace CRClient
         private readonly IHttpCoolRunnerClient _client;
         private HttpResponseMessage _response;
         private string _baseUrl = "https://api.coolrunner.dk/v1";
-        private JsonSerializerSettings _settings = new JsonSerializerSettings();
 
-        public CoolRunnerClient() : this(new HttpCoolRunnerClient())
+        public CoolRunnerClient(string username, string passwordOrToken, string xDeveloperId = null)
         {
+            var authentication = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{passwordOrToken}")));
+            _client = new HttpCoolRunnerClient(authentication, xDeveloperId);
         }
 
-        public CoolRunnerClient(IHttpCoolRunnerClient httpClient)
+        /// <summary>
+        /// This constructor is only meant for testing purposes.
+        /// </summary>
+        /// <param name="httpClient">To mock HttpCoolRunnerClient.</param>
+        protected CoolRunnerClient(IHttpCoolRunnerClient httpClient)
         {
             _client = httpClient;
-            _settings.ContractResolver = new UnderscoreMappingResolver();
         }
 
+        /// <summary>
+        /// Creates a new shipment.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>A label and the data for that label.</returns>
         public async Task<ShipmentResponse> CreateShipmentAsync(ShipmentModel model)
         {
             _response =
@@ -48,6 +59,11 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, json);
         }
 
+        /// <summary>
+        /// Creates a new shipment.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>A label and the data for that label.</returns>
         public ShipmentResponse CreateShipment(ShipmentModel model)
         {
             _response =
@@ -64,6 +80,11 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, json);
         }
 
+        /// <summary>
+        /// Gets the price for a shipment.
+        /// </summary>
+        /// <param name="model">The shipment that the price will be based on.</param>
+        /// <returns>A price model</returns>
         public async Task<PriceResponse> GetPriceAsync(ShipmentModel model)
         {
             _response = await _client.PostAsync($"{_baseUrl}/shipment/price", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat()));
@@ -153,6 +174,36 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, json);
         }
 
+        public async Task<FreightRatesResponse> GetFreightRatesAsync(string fromCountryIso)
+        {
+            _response = await _client.GetAsync($"{_baseUrl}/freight_rates/{fromCountryIso}");
+
+            var json = await _response.Content.ReadAsStringAsync();
+
+            if (_response.IsSuccessStatusCode)
+            {
+                var obj = JsonConvert.DeserializeObject<dynamic>(json);
+                return FreightRatesResponse.Map(obj.result);
+            }
+
+            throw new CoolRunnerException(_response.StatusCode, json);
+        }
+
+        public FreightRatesResponse GetFreightRates(string fromCountryIso)
+        {
+            _response = _client.GetAsync($"{_baseUrl}/freight_rates/{fromCountryIso}").Result;
+
+            var json = _response.Content.ReadAsStringAsync().Result;
+
+            if (_response.IsSuccessStatusCode)
+            {
+                var obj = JsonConvert.DeserializeObject<dynamic>(json);
+                return FreightRatesResponse.Map(obj.result);
+            }
+
+            throw new CoolRunnerException(_response.StatusCode, json);
+        }
+
 
         public async Task<bool> DeletePackageLabelAsync(long packageNumber)
         {
@@ -172,6 +223,36 @@ namespace CRClient
                 return true;
 
             throw new CoolRunnerException(_response.StatusCode, _response.Content.ReadAsStringAsync().Result);
+        }
+
+        public async Task<TrackingResponse> GetTrackingDataAsync(long packageNumber)
+        {
+            _response = await _client.GetAsync($"{_baseUrl}/tracking/{packageNumber}");
+
+            var json = await _response.Content.ReadAsStringAsync();
+
+            if (_response.IsSuccessStatusCode)
+            {
+                var obj = JsonConvert.DeserializeObject<dynamic>(json);
+                return TrackingResponse.Map(obj);
+            }
+
+            throw new CoolRunnerException(_response.StatusCode, json);
+        }
+
+        public TrackingResponse GetTrackingData(long packageNumber)
+        {
+            _response = _client.GetAsync($"{_baseUrl}/tracking/{packageNumber}").Result;
+
+            var json = _response.Content.ReadAsStringAsync().Result;
+
+            if (_response.IsSuccessStatusCode)
+            {
+                var obj = JsonConvert.DeserializeObject<dynamic>(json);
+                return TrackingResponse.Map(obj);
+            }
+
+            throw new CoolRunnerException(_response.StatusCode, json);
         }
 
         public HttpStatusCode? StatusCode => _response?.StatusCode;

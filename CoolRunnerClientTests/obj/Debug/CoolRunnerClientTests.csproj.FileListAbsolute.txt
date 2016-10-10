@@ -1,11 +1,6 @@
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\CoolRunnerClientTests.dll
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\CoolRunnerClientTests.pdb
-C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Castle.Core.dll
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\CRClient.dll
-C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\FluentValidation.dll
-C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Moq.dll
-C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Newtonsoft.Json.dll
-C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\nunit.framework.dll
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\CRClient.pdb
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Castle.Core.xml
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\FluentValidation.pdb

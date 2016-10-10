@@ -67,7 +67,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CoolRunnerclientTests.cs" />
+    <Compile Include="CoolRunnerClientMock.cs" />
+    <Compile Include="CoolRunnerClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,10 +18,10 @@ using NUnit.Framework;
 
 namespace CoolRunnerClientTests
 {
-    public class CoolRunnerclientTests
+    public class CoolRunnerClientTests
     {
         private Mock<IHttpCoolRunnerClient> _httpMock;
-        private CoolRunnerClient _sut;
+        private CoolRunnerClientMock _sut;
         private readonly string _baseUrl = "https://api.coolrunner.dk/v1";
 
         #region Models
@@ -130,7 +130,7 @@ namespace CoolRunnerClientTests
         public void BeforeEach()
         {
             _httpMock = new Mock<IHttpCoolRunnerClient>();
-            _sut = new CoolRunnerClient(_httpMock.Object);
+            _sut = new CoolRunnerClientMock(_httpMock.Object);
         }
 
         [Test]

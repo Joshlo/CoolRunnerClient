@@ -1,19 +1,29 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace CRClient.HttpClient
 {
     internal class HttpCoolRunnerClient : IHttpCoolRunnerClient
     {
-        public Task<HttpResponseMessage> PostAsync(string url, HttpContent content)
+        private readonly System.Net.Http.HttpClient _client;
+
+        public HttpCoolRunnerClient(AuthenticationHeaderValue authentication, string xDeveloperId)
         {
-            throw new NotImplementedException();
+            _client = new System.Net.Http.HttpClient();
+            _client.DefaultRequestHeaders.Authorization = authentication;
+            if(!string.IsNullOrWhiteSpace(xDeveloperId))
+                _client.DefaultRequestHeaders.Add("X-Developer_Id", xDeveloperId);
+        }
+        public async Task<HttpResponseMessage> PostAsync(string url, HttpContent content)
+        {
+            return await _client.PostAsync(url, content);
         }
 
-        public Task<HttpResponseMessage> GetAsync(string url)
+        public async Task<HttpResponseMessage> GetAsync(string url)
         {
-            throw new NotImplementedException();
+            return await _client.GetAsync(url);
         }
     }
 }
