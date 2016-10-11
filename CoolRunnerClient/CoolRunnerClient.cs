@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,18 @@ namespace CRClient
         private readonly IHttpCoolRunnerClient _client;
         private HttpResponseMessage _response;
         private string _baseUrl = "https://api.coolrunner.dk/v1";
+        private bool _hasSetCredentials;
 
-        public CoolRunnerClient(string username, string passwordOrToken, string xDeveloperId = null)
+        public CoolRunnerClient()
         {
-            var authentication = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{passwordOrToken}")));
-            _client = new HttpCoolRunnerClient(authentication, xDeveloperId);
+            _client = new HttpCoolRunnerClient();
+        }
+
+        public CoolRunnerClient(string username, string passwordOrToken, string callerIndetifier = null)
+        {
+            _client = new HttpCoolRunnerClient();
+            SetCredentials(username, passwordOrToken);
+            SetCallerIdentifier(callerIndetifier);
         }
 
         /// <summary>
@@ -37,6 +45,19 @@ namespace CRClient
             _client = httpClient;
         }
 
+        public void SetCredentials(string username, string passwordOrToken)
+        {
+            var authentication = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{passwordOrToken}")));
+            _client.SetCredentials(authentication);
+            _hasSetCredentials = true;
+        }
+
+        public void SetCallerIdentifier(string callerIdentifier)
+        {
+            if(!string.IsNullOrWhiteSpace(callerIdentifier))
+                _client.SetCallerIdentifier(callerIdentifier);
+        }
+
         /// <summary>
         /// Creates a new shipment.
         /// </summary>
@@ -44,6 +65,9 @@ namespace CRClient
         /// <returns>A label and the data for that label.</returns>
         public async Task<ShipmentResponse> CreateShipmentAsync(ShipmentModel model)
         {
+            if(!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response =
                 await
                     _client.PostAsync($"{_baseUrl}/shipment/create", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat()));
@@ -66,6 +90,9 @@ namespace CRClient
         /// <returns>A label and the data for that label.</returns>
         public ShipmentResponse CreateShipment(ShipmentModel model)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response =
                 _client.PostAsync($"{_baseUrl}/shipment/create", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat())).Result;
 
@@ -87,6 +114,9 @@ namespace CRClient
         /// <returns>A price model</returns>
         public async Task<PriceResponse> GetPriceAsync(ShipmentModel model)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = await _client.PostAsync($"{_baseUrl}/shipment/price", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat()));
 
             var json = await _response.Content.ReadAsStringAsync();
@@ -102,6 +132,9 @@ namespace CRClient
 
         public PriceResponse GetPrice(ShipmentModel model)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = _client.PostAsync($"{_baseUrl}/shipment/price", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat())).Result;
             var json = _response.Content.ReadAsStringAsync().Result;
 
@@ -116,10 +149,13 @@ namespace CRClient
 
         public async Task<ShipmentInfoResponse> GetShipmentInfoAsync(long shipmentId)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = await _client.GetAsync($"{_baseUrl}/shipment/info/{shipmentId}");
 
             var json = await _response.Content.ReadAsStringAsync();
-            
+
             if (_response.IsSuccessStatusCode)
             {
                 var obj = JsonConvert.DeserializeObject<dynamic>(json);
@@ -131,6 +167,9 @@ namespace CRClient
 
         public ShipmentInfoResponse GetShipmentInfo(long shipmentId)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = _client.GetAsync($"{_baseUrl}/shipment/info/{shipmentId}").Result;
 
             var json = _response.Content.ReadAsStringAsync().Result;
@@ -146,6 +185,9 @@ namespace CRClient
 
         public async Task<DroppointResponse> GetDroppointsAsync(Carrier carrier, DroppointModel model)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = await _client.PostAsync($"{_baseUrl}/droppoints/{carrier}", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat()));
 
             var json = await _response.Content.ReadAsStringAsync();
@@ -161,6 +203,9 @@ namespace CRClient
 
         public DroppointResponse GetDroppoints(Carrier carrier, DroppointModel model)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = _client.PostAsync($"{_baseUrl}/droppoints/{carrier}", new FormUrlEncodedContent(model.ToCoolRunnerNamingFormat())).Result;
 
             var json = _response.Content.ReadAsStringAsync().Result;
@@ -176,6 +221,9 @@ namespace CRClient
 
         public async Task<FreightRatesResponse> GetFreightRatesAsync(string fromCountryIso)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = await _client.GetAsync($"{_baseUrl}/freight_rates/{fromCountryIso}");
 
             var json = await _response.Content.ReadAsStringAsync();
@@ -191,6 +239,9 @@ namespace CRClient
 
         public FreightRatesResponse GetFreightRates(string fromCountryIso)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = _client.GetAsync($"{_baseUrl}/freight_rates/{fromCountryIso}").Result;
 
             var json = _response.Content.ReadAsStringAsync().Result;
@@ -207,6 +258,9 @@ namespace CRClient
 
         public async Task<bool> DeletePackageLabelAsync(long packageNumber)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = await _client.GetAsync($"{_baseUrl}/shipment/delete/{packageNumber}");
 
             if (_response.IsSuccessStatusCode)
@@ -217,6 +271,9 @@ namespace CRClient
 
         public bool DeletePackageLabel(long packageNumber)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = _client.GetAsync($"{_baseUrl}/shipment/delete/{packageNumber}").Result;
 
             if (_response.IsSuccessStatusCode)
@@ -227,6 +284,9 @@ namespace CRClient
 
         public async Task<TrackingResponse> GetTrackingDataAsync(long packageNumber)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = await _client.GetAsync($"{_baseUrl}/tracking/{packageNumber}");
 
             var json = await _response.Content.ReadAsStringAsync();
@@ -242,6 +302,9 @@ namespace CRClient
 
         public TrackingResponse GetTrackingData(long packageNumber)
         {
+            if (!_hasSetCredentials)
+                throw new AuthenticationException("Credentials not set");
+
             _response = _client.GetAsync($"{_baseUrl}/tracking/{packageNumber}").Result;
 
             var json = _response.Content.ReadAsStringAsync().Result;

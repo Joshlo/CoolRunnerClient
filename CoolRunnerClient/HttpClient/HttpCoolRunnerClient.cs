@@ -9,13 +9,21 @@ namespace CRClient.HttpClient
     {
         private readonly System.Net.Http.HttpClient _client;
 
-        public HttpCoolRunnerClient(AuthenticationHeaderValue authentication, string xDeveloperId)
+        public HttpCoolRunnerClient()
         {
             _client = new System.Net.Http.HttpClient();
-            _client.DefaultRequestHeaders.Authorization = authentication;
-            if(!string.IsNullOrWhiteSpace(xDeveloperId))
-                _client.DefaultRequestHeaders.Add("X-Developer_Id", xDeveloperId);
         }
+
+        public void SetCredentials(AuthenticationHeaderValue authorize)
+        {
+            _client.DefaultRequestHeaders.Authorization = authorize;
+        }
+
+        public void SetCallerIdentifier(string caller)
+        {
+            _client.DefaultRequestHeaders.Add("X-Developer_Id", caller);
+        }
+
         public async Task<HttpResponseMessage> PostAsync(string url, HttpContent content)
         {
             return await _client.PostAsync(url, content);

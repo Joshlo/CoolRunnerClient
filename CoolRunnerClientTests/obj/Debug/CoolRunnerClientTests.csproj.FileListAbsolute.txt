@@ -28,3 +28,8 @@ C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\zh-CN\FluentValidation.
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\obj\Debug\CoolRunnerClientTests.csprojResolveAssemblyReference.cache
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\obj\Debug\CoolRunnerClientTests.dll
 C:\Kode\CoolRunnerClient\CoolRunnerClientTests\obj\Debug\CoolRunnerClientTests.pdb
+C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Castle.Core.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\FluentValidation.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Moq.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\Newtonsoft.Json.dll
+C:\Kode\CoolRunnerClient\CoolRunnerClientTests\bin\Debug\nunit.framework.dll

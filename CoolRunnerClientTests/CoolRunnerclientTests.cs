@@ -131,6 +131,8 @@ namespace CoolRunnerClientTests
         {
             _httpMock = new Mock<IHttpCoolRunnerClient>();
             _sut = new CoolRunnerClientMock(_httpMock.Object);
+            _sut.SetCredentials("test", "test");
+            _sut.SetCallerIdentifier("ClientTests");
         }
 
         [Test]
@@ -138,8 +140,7 @@ namespace CoolRunnerClientTests
         {
             // Arrange
             var jsonResponse = JObject.FromObject(new { status = "ok", message = "", result = new { order_id = 1, grand_total_excl_tax = 40, grand_total_incl_tax = 50, shipment_id = 10000, price_incl_tax = 50, price_excl_tax = 40, reference = "132546", package_number = 45621346587952, labelless_code = "", pdf_base64 = "JVBERi0xLjMNCiXi48/TDQoxIDAgb2JqDQo8PA...", pdf_link = "https://api.coolrunner.dk/v1/pdf/Ny0xNjQtMTc5LTA1NzAwMDAyMDEzMTAwMDEyNB" } });
-
-
+            
             var successResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(jsonResponse.ToString())

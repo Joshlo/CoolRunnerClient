@@ -9,6 +9,8 @@ namespace CRClient
 {
     public interface ICoolRunnerClient
     {
+        void SetCredentials(string username, string passwordOrToken);
+        void SetCallerIdentifier(string callerIdentifier);
         Task<ShipmentResponse> CreateShipmentAsync(ShipmentModel model);
         ShipmentResponse CreateShipment(ShipmentModel model);
         Task<PriceResponse> GetPriceAsync(ShipmentModel model);
