@@ -147,7 +147,7 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, json);
         }
 
-        public async Task<ShipmentInfoResponse> GetShipmentInfoAsync(long shipmentId)
+        public async Task<ShipmentInfoResponse> GetShipmentInfoAsync(string shipmentId)
         {
             if (!_hasSetCredentials)
                 throw new AuthenticationException("Credentials not set");
@@ -165,7 +165,7 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, json);
         }
 
-        public ShipmentInfoResponse GetShipmentInfo(long shipmentId)
+        public ShipmentInfoResponse GetShipmentInfo(string shipmentId)
         {
             if (!_hasSetCredentials)
                 throw new AuthenticationException("Credentials not set");
@@ -256,7 +256,7 @@ namespace CRClient
         }
 
 
-        public async Task<bool> DeletePackageLabelAsync(long packageNumber)
+        public async Task<bool> DeletePackageLabelAsync(string packageNumber)
         {
             if (!_hasSetCredentials)
                 throw new AuthenticationException("Credentials not set");
@@ -269,7 +269,7 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, await _response.Content.ReadAsStringAsync());
         }
 
-        public bool DeletePackageLabel(long packageNumber)
+        public bool DeletePackageLabel(string packageNumber)
         {
             if (!_hasSetCredentials)
                 throw new AuthenticationException("Credentials not set");
@@ -282,7 +282,7 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, _response.Content.ReadAsStringAsync().Result);
         }
 
-        public async Task<TrackingResponse> GetTrackingDataAsync(long packageNumber)
+        public async Task<TrackingResponse> GetTrackingDataAsync(string packageNumber)
         {
             if (!_hasSetCredentials)
                 throw new AuthenticationException("Credentials not set");
@@ -300,7 +300,7 @@ namespace CRClient
             throw new CoolRunnerException(_response.StatusCode, json);
         }
 
-        public TrackingResponse GetTrackingData(long packageNumber)
+        public TrackingResponse GetTrackingData(string packageNumber)
         {
             if (!_hasSetCredentials)
                 throw new AuthenticationException("Credentials not set");
