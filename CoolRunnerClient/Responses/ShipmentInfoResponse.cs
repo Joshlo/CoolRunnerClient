@@ -6,7 +6,7 @@ namespace CRClient.Responses
     {
         public long ShipmentId { get; internal set; }
         public long OrderId { get; internal set; }
-        public long PackageNumber { get; internal set; }
+        public string PackageNumber { get; internal set; }
         public string PdfBase64 { get; internal set; }
         public string PdfLink { get; internal set; }
 

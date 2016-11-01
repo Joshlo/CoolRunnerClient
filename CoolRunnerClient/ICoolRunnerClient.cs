@@ -15,16 +15,16 @@ namespace CRClient
         ShipmentResponse CreateShipment(ShipmentModel model);
         Task<PriceResponse> GetPriceAsync(ShipmentModel model);
         PriceResponse GetPrice(ShipmentModel model);
-        Task<ShipmentInfoResponse> GetShipmentInfoAsync(long shipmentId);
-        ShipmentInfoResponse GetShipmentInfo(long shipmentId);
+        Task<ShipmentInfoResponse> GetShipmentInfoAsync(string shipmentId);
+        ShipmentInfoResponse GetShipmentInfo(string shipmentId);
         Task<DroppointResponse> GetDroppointsAsync(Carrier carrier, DroppointModel model);
         DroppointResponse GetDroppoints(Carrier carrier, DroppointModel model);
         Task<FreightRatesResponse> GetFreightRatesAsync(string fromCountryIso);
         FreightRatesResponse GetFreightRates(string fromCountryIso);
-        Task<bool> DeletePackageLabelAsync(long packageNumber);
-        bool DeletePackageLabel(long packageNumber);
-        Task<TrackingResponse> GetTrackingDataAsync(long packageNumber);
-        TrackingResponse GetTrackingData(long packageNumber);
+        Task<bool> DeletePackageLabelAsync(string packageNumber);
+        bool DeletePackageLabel(string packageNumber);
+        Task<TrackingResponse> GetTrackingDataAsync(string packageNumber);
+        TrackingResponse GetTrackingData(string packageNumber);
         HttpStatusCode? StatusCode { get; }
     }
 }

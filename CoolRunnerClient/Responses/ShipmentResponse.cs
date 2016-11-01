@@ -9,7 +9,7 @@
         public int ShipmentId { get; internal set; }
         public int PriceExclTax { get; internal set; }
         public int PriceInclTax { get; internal set; }
-        public long PackageNumber { get; internal set; }
+        public string PackageNumber { get; internal set; }
         public string LabellessCode { get; internal set; }
         public string PdfBase64 { get; internal set; }
         public string PdfLink { get; internal set; }

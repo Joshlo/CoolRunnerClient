@@ -165,7 +165,7 @@ namespace CoolRunnerClientTests
             Assert.AreEqual(50, response.PriceInclTax);
             Assert.AreEqual("132546", response.Reference);
             Assert.AreEqual("", response.LabellessCode);
-            Assert.AreEqual(45621346587952, response.PackageNumber);
+            Assert.AreEqual("45621346587952", response.PackageNumber);
             Assert.AreEqual("JVBERi0xLjMNCiXi48/TDQoxIDAgb2JqDQo8PA...", response.PdfBase64);
             Assert.AreEqual("https://api.coolrunner.dk/v1/pdf/Ny0xNjQtMTc5LTA1NzAwMDAyMDEzMTAwMDEyNB", response.PdfLink);
         }
@@ -223,7 +223,7 @@ namespace CoolRunnerClientTests
             Assert.AreEqual(50, response.PriceInclTax);
             Assert.AreEqual("132546", response.Reference);
             Assert.AreEqual("", response.LabellessCode);
-            Assert.AreEqual(45621346587952, response.PackageNumber);
+            Assert.AreEqual("45621346587952", response.PackageNumber);
             Assert.AreEqual("JVBERi0xLjMNCiXi48/TDQoxIDAgb2JqDQo8PA...", response.PdfBase64);
             Assert.AreEqual("https://api.coolrunner.dk/v1/pdf/Ny0xNjQtMTc5LTA1NzAwMDAyMDEzMTAwMDEyNB", response.PdfLink);
         }
@@ -372,12 +372,12 @@ namespace CoolRunnerClientTests
                 .ReturnsAsync(successResponseMessage);
 
             // Act
-            var response = await _sut.GetShipmentInfoAsync(1);
+            var response = await _sut.GetShipmentInfoAsync("1");
 
             // Assert
             Assert.AreEqual(1, response.ShipmentId);
             Assert.AreEqual(1, response.OrderId);
-            Assert.AreEqual(1234567898, response.PackageNumber);
+            Assert.AreEqual("1234567898", response.PackageNumber);
             Assert.AreEqual("JVBERi0xLjMNCiXi48/TDQoxIDAgb2JqDQo8PA", response.PdfBase64);
             Assert.AreEqual("https://api.coolrunner.dk/v1/pdf/Ny0xNjQtMTc5LTA1NzAwMDAyMDEzMTAwMDEyNB", response.PdfLink);
         }
@@ -397,7 +397,7 @@ namespace CoolRunnerClientTests
                 .ReturnsAsync(errorResponseMessage);
 
             // Act & Assert
-            Assert.That(async () => await _sut.GetShipmentInfoAsync(1), Throws.Exception.TypeOf<CoolRunnerException>());
+            Assert.That(async () => await _sut.GetShipmentInfoAsync("1"), Throws.Exception.TypeOf<CoolRunnerException>());
         }
 
         [Test]
@@ -415,12 +415,12 @@ namespace CoolRunnerClientTests
                 .ReturnsAsync(successResponseMessage);
 
             // Act
-            var response = _sut.GetShipmentInfo(1);
+            var response = _sut.GetShipmentInfo("1");
 
             // Assert
             Assert.AreEqual(1, response.ShipmentId);
             Assert.AreEqual(1, response.OrderId);
-            Assert.AreEqual(1234567898, response.PackageNumber);
+            Assert.AreEqual("1234567898", response.PackageNumber);
             Assert.AreEqual("JVBERi0xLjMNCiXi48/TDQoxIDAgb2JqDQo8PA", response.PdfBase64);
             Assert.AreEqual("https://api.coolrunner.dk/v1/pdf/Ny0xNjQtMTc5LTA1NzAwMDAyMDEzMTAwMDEyNB", response.PdfLink);
         }
@@ -440,7 +440,7 @@ namespace CoolRunnerClientTests
                 .ReturnsAsync(errorResponseMessage);
 
             // Act & Assert
-            Assert.That(() => _sut.GetShipmentInfo(1), Throws.Exception.TypeOf<CoolRunnerException>());
+            Assert.That(() => _sut.GetShipmentInfo("1"), Throws.Exception.TypeOf<CoolRunnerException>());
         }
 
         [TestCase(Carrier.Dao)]
@@ -563,7 +563,7 @@ namespace CoolRunnerClientTests
             _httpMock.Setup(x => x.GetAsync($"{_baseUrl}/shipment/delete/1")).ReturnsAsync(successHttpResponseMessage);
 
             // Act
-            var response = await _sut.DeletePackageLabelAsync(1);
+            var response = await _sut.DeletePackageLabelAsync("1");
 
             // Assert
             Assert.IsTrue(response);
@@ -583,7 +583,7 @@ namespace CoolRunnerClientTests
             _httpMock.Setup(x => x.GetAsync($"{_baseUrl}/shipment/delete/1")).ReturnsAsync(errorHttpResponseMessage);
 
             // Act & Assert
-            Assert.That(async () => await _sut.DeletePackageLabelAsync(1), Throws.Exception.TypeOf<CoolRunnerException>());
+            Assert.That(async () => await _sut.DeletePackageLabelAsync("1"), Throws.Exception.TypeOf<CoolRunnerException>());
         }
 
         [Test]
@@ -600,7 +600,7 @@ namespace CoolRunnerClientTests
             _httpMock.Setup(x => x.GetAsync($"{_baseUrl}/shipment/delete/1")).ReturnsAsync(successHttpResponseMessage);
 
             // Act
-            var response = _sut.DeletePackageLabel(1);
+            var response = _sut.DeletePackageLabel("1");
 
             // Assert
             Assert.IsTrue(response);
@@ -620,7 +620,7 @@ namespace CoolRunnerClientTests
             _httpMock.Setup(x => x.GetAsync($"{_baseUrl}/shipment/delete/1")).ReturnsAsync(errorHttpResponseMessage);
 
             // Act & Assert
-            Assert.That(() => _sut.DeletePackageLabel(1), Throws.Exception.TypeOf<CoolRunnerException>());
+            Assert.That(() => _sut.DeletePackageLabel("1"), Throws.Exception.TypeOf<CoolRunnerException>());
         }
     }
 }
